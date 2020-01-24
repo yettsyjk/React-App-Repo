@@ -1,7 +1,7 @@
 h2 {
   color: #ffffff;
   display: block;
-  font-size: 1.5em;
+  font-size: 3em;
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   margin-inline-start: 0px;
@@ -45,7 +45,7 @@ h2 {
 
 .App-header {
   background-color: #cccccc;
-  min-height: 100vh;
+  min-height: 200vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@ h2 {
 }
 
 .App-link {
-  color: #61dafb;
+  color: #0d2b33;
 }
 
 @keyframes App-logo-spin {

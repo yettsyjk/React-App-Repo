@@ -15,7 +15,7 @@ class CreateCloud extends Component {
 }
 handleChange = (e) => {
     this.setState({
-        [e.currentTarget.city]: e.currentTarget.value
+        [e.currentTarget.name]: e.currentTarget.value
     })
 }
 clearForm = () => {
@@ -81,7 +81,7 @@ render() {
                                 onChange={this.handleChange}
                                 />
                     </Form.Field>
-                    <Button type="Submit">Add New Weather Data</Button>
+                    <Button type="submit">Add New Weather Data</Button>
                     </Form>
                 </Modal.Content>
         </Modal>
