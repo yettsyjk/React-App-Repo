@@ -10,29 +10,30 @@ class CloudContainer extends Component {
         this.createCloudFormRef = React.createRef()
         this.state = {
                 clouds: [],
-                city: "",
-                state: "",
-                country: "",
-                weather: "",
-                temp: 0,
+                // city: "",
+                // us_state: "",
+                // country: "",
+                // weather: "",
+                // temp: 0,
             createModalOpen: false,
             editModalOpen: false,
-            searchedDone: false,
+            // searchedDone: false,
             // savedCities: [],
             // hasSavedCities: false,
-            errorMessage: "",
+            // errorMessage: "",
             cloudToEdit: {
                 city: "",
-                state: "",
+                us_state: "",
                 country: "",
                 weather: "",
-                temp: ""
+                temp: "",
+                id: ""
             }
         }
     }
        
 editCloud = (idOfCloudToEdit) => {
-    const cloudToEdit = this.state.clouds.find(cloud => cloud.id === idOfCloudToEdit)
+    const cloudToEdit = this.state.clouds.find(cloud => cloud.id == idOfCloudToEdit)
     this.setState({
         editModalOpen: true,
         cloudToEdit: {
@@ -88,12 +89,12 @@ deleteCloud = async (id) => {
         clouds: this.state.clouds.filter((cloud) => cloud.id !== id)
     })
 }
-    createCloud = () => {
-        this.setState({
-            createModalOpen: true
+ createCloud = () => {
+     this.setState({
+         createModalOpen: true
         })
     }
-    addCloud = async (e, cloudFromTheForm) => {
+ addCloud = async (e, cloudFromTheForm) => {
         e.preventDefault()
         try{
             const createdCloudResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/clouds/`, {
@@ -112,21 +113,20 @@ deleteCloud = async (id) => {
         } catch (err){
             console.log("error: ", err)
     }
-}
+    }
     closeCreateModal = () => {
         this.setState({
             createModalOpen: false
+        }, () => {
+            this.createCloudFormRef.current.clearForm()
         })
-    }
-    componentDidMount() {
-        this.getClouds();
     }
     getClouds = async ()=>{
         try {
             const clouds = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/clouds/`, {credentials: 'include'})
             const parsedClouds = await clouds.json();
-            console.log('parsedclouds: ', parsedClouds)
-
+            console.log('parsedClouds: ', parsedClouds)
+            
             this.setState({
                 clouds: parsedClouds.data
             })
@@ -135,11 +135,16 @@ deleteCloud = async (id) => {
         }
     }
     
+    componentDidMount() {
+        this.getClouds();
+    }
 
 render(){
     
     return(
         <div className="Clouds">
+            {
+                this.props.loggedIn ?
             <Grid
                 textAlign="center"
                 style={
@@ -148,13 +153,17 @@ render(){
                 verticalAlign="top"
                 stackable
             >
-                <Grid.Row><Button onClick={this.createCloud}>Create Weather request</Button>
+                <Grid.Row>
+                    <Button onClick={this.createCloud}>Create Weather request</Button>
+                    </Grid.Row>
+                <Grid.Row>
                 <Grid.Column>
                     <CloudList
                         clouds={this.state.clouds}
                         deleteCloud={this.state.deleteCloud}
                         editCloud={this.state.editCloud}
-                    /></Grid.Column>
+                    />
+                </Grid.Column>
                 <CreateCloud
                  open={this.state.createModalOpen}
                  closeModal={this.closeCreateModal}
@@ -162,13 +171,27 @@ render(){
                  ref={this.createCloudFormRef}
                 />
                 <EditCloudModal
+                    open={this.state.editModalOpen}
                     updateCloud={this.updateCloud}
+                    cloudToEdit={this.state.cloudToEdit}
+                    closeModal={this.closeEditModal}
+                    handleEditChange={this.handleEditChange}
                 />
             </Grid.Row>
             </Grid>
+            :
+            <Grid
+                textAlign='center'
+                style={{ marginTop: '6em', height: '100%' }}
+                verticalAlign='top'
+                stackable
+            >
+                You must be logged in to see your local weather.
+            </Grid>
+            }
         </div>
+      )
+    }
+}
 
-    )
-}
-}
 export default CloudContainer;

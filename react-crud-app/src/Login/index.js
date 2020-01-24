@@ -30,7 +30,7 @@ class LoginRegisterForm extends Component {
             console.log('Login Failed: ', parsedLoginResponse);
             }
         }
-    register = async (registerInfo) => {
+register = async (registerInfo) => {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/register`, {
             method: 'POST',
             credentials: 'include',
@@ -40,7 +40,7 @@ class LoginRegisterForm extends Component {
             }
     })
     const parsedRegisterResponse = await response.json();
-    if(parsedRegisterResponse.status.code === 200){
+    if(parsedRegisterResponse.status.code === 201){
         this.props.loggedStatus(parsedRegisterResponse.data.email)
         this.props.history.push('/clouds');
     } else {
@@ -64,7 +64,7 @@ addUsername = async (e) => {
     })
     this.props.test(this.state)
     this.setState({
-        username: "",
+        username: ""
     })
 }
 switchForm = () => {
@@ -128,8 +128,6 @@ render(){
                                     fluid
                                     icon="mail"
                                     iconPosition="left"
-                                    autocomplete="off"
-                                    required
                                     type="email"
                                     name="email"
                                     placeholder="Email"
@@ -140,14 +138,15 @@ render(){
                                     fluid
                                     icon="lock"
                                     iconPosition="left"
-                                    required
                                     type="password"
                                     name="password"
                                     placeholder="Password"
                                     value={this.state.password}
                                     onChange={this.handleChange}
                                />
-                               <Button fluid size="large" type="Submit">{this.state.action === "register" ? "Register" : "Log in"}</Button>
+                               <Button fluid size="large" type="Submit">
+                                   {this.state.action === "register" ? "Register" : "Log in"}
+                               </Button>
                            </Segment>
                         </Form>
     <Message>

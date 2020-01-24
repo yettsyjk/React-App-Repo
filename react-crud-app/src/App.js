@@ -26,6 +26,12 @@ class App extends Component {
      loggedInUserEmail: loggedInUserEmail
    })
  }
+ testMethod = (state) => {
+   this.setState({
+     thesMessage: state.message,
+     username: state.username
+   })
+ }
  logout = async () => {
    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/logout`, {
     method: 'GET',

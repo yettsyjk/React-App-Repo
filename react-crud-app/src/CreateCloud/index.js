@@ -7,7 +7,7 @@ class CreateCloud extends Component {
         super();
         this.state = {
             city: '',
-            state: '',
+            us_state: '',
             country: '',
             weather: '',
             temp: '',
@@ -21,7 +21,7 @@ handleChange = (e) => {
 clearForm = () => {
     this.setState({
         city: '',
-            state: '',
+            us_state: '',
             country: '',
             weather: '',
             temp: '',
@@ -49,17 +49,8 @@ render() {
                             <label>State</label>
                             <Form.Input
                                 type="text"
-                                name="state"
-                                value={this.state.state}
-                                onChange={this.handleChange}
-                                />
-                    </Form.Field>
-                    <Form.Field>
-                            <label>Country</label>
-                            <Form.Input
-                                type="text"
-                                name="country"
-                                value={this.state.country}
+                                name="us_state"
+                                value={this.state.us_state}
                                 onChange={this.handleChange}
                                 />
                     </Form.Field>
@@ -73,7 +64,7 @@ render() {
                                 />
                     </Form.Field>
                     <Form.Field>
-                            <label>Temp.</label>
+                            <label>Temperature</label>
                             <Form.Input
                                 type="text"
                                 name="temp"
@@ -85,7 +76,7 @@ render() {
                     </Form>
                 </Modal.Content>
         </Modal>
-    )
+        )
     }
 }
 export default CreateCloud;

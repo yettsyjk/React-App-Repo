@@ -8,7 +8,7 @@ function CloudList(props){
             <Card key={cloud.id}>
                 <Card.Content>
         <Card.Header>{cloud.city}</Card.Header>
-                    <Card.Description>{cloud.state}</Card.Description>
+                    <Card.Description>{cloud.us_state}</Card.Description>
                     <Card.Description>{cloud.weather}</Card.Description>
                     <Card.Description>{cloud.temp}</Card.Description>
                     <Card.Description image='https://img.icons8.com/cute-clipart/64/000000/cloud.png'></Card.Description>
