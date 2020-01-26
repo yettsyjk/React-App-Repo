@@ -12,9 +12,9 @@ class HeaderComponent extends Component {
             <Menu fixed="top" inverted>
                 <Container>
                     <Menu.Item><Link to='/'>Home</Link></Menu.Item>
-                    <Menu.Item><Link to='/clouds'>Weather</Link></Menu.Item>
+                    <Menu.Item><Link to='/birds'>Bird List</Link></Menu.Item>
                    {
-                    this.props.loddegIn 
+                    this.props.loggedIn 
                     ?
                     <Menu.Item>
                         <Link to='/' onClick={this.logoutHandler}>LogOut</Link>
