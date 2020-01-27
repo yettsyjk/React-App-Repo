@@ -56,6 +56,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={(props) => <LoginRegisterForm {...props} loggedIn={this.state.loggedIn} loggedStatus={this.handleLoggedInStatus} /> }/>
           <Route exact path="/birds" render={(props) => <BirdContainer {...props} loggedIn={this.state.loggedIn} loggedStatus={this.handleLoggedInStatus} /> } />
+          <Route exact path="/login" />
           <Route component={ My404 }/>
         </Switch>
       </main>
